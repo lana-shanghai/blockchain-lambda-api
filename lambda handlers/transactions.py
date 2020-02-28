@@ -37,7 +37,6 @@ def lambda_handler(event, context):
         }
     )
    
-    print(response)
     records = ''
     for events in response['Payload']:
         if 'Records' in events:

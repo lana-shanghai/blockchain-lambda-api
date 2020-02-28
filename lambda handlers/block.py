@@ -25,7 +25,7 @@ def lambda_handler(event, context):
         }
     )
    
-    print(response)
+    records = ''
     for events in response['Payload']:
         if 'Records' in events:
             records = events['Records']['Payload'].decode('utf-8')
@@ -37,7 +37,15 @@ def lambda_handler(event, context):
             print(statsDetails['BytesScanned'])
             print("Bytes processed: ")
             print(statsDetails['BytesProcessed'])    
+    
+    if records == '':
+        return {
+            'statusCode': 200,
+            'body': 'page does not exist'
+        }
+        
     return {
         'statusCode': 200,
-        'body': json.loads(records) 
+        'body': json.loads(records)
     }
+    
